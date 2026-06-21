@@ -12,7 +12,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 # 2. --- CONFIGURATION ---
 TARGET_GAME_ID = 4238077359                     # Your hardcoded Roblox Game/Place ID
 REQUIRED_ROLE_ID = 1517189563473203453          # Your hardcoded Discord Staff Role ID
-SAVE_FILE = "bounties.txt"                      # File name where targets are permanently stored
+SAVE_FILE = "data/bounties.txt"
 
 # Global state tracking
 KOS_LIST = {}
