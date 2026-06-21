@@ -131,6 +131,20 @@ async def bounty_remove(interaction: discord.Interaction, roblox_id: int):
     else:
         await interaction.response.send_message(f"❌ No active ticket found for Roblox ID: `{roblox_id}`", ephemeral=True)
 
+@bot.tree.command(name="bounty-radar", description="Deploy a fresh instance of the self-updating live radar board.")
+async def bounty_radar(interaction: discord.Interaction):
+    global alert_channel, radar_message
+    if not has_bounty_role(interaction):
+        await interaction.response.send_message("❌ You do not have permission to deploy the tracking terminal.", ephemeral=True)
+        return
+
+    # Set this channel as the live alert and radar room
+    alert_channel = interaction.channel
+    
+    # Forces the background loop to generate a brand new message on its next cycle
+    radar_message = None
+
+    await interaction.response.send_message("📡 **Radar Initialized:** Deploying a live, self-updating target matrix to this channel momentarily...", ephemeral=True)
 # 5. --- AUTOMATED TRACKING & AUTO-REFRESH RADAR LOOP ---
 @tasks.loop(seconds=30)
 async def background_tracking_matrix():
